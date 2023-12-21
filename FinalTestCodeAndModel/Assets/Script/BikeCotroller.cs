@@ -77,10 +77,14 @@ public class BikeCotroller : MonoBehaviour
 
     private float currentSteerAngle;
 
+    [Header("Audio")]
+    private AudioSource _audio;
+
     void Awake() 
     {
         rb = gameObject.GetComponent<Rigidbody>();
         cameraTranform = Camera.main.transform;
+        _audio = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -97,7 +101,12 @@ public class BikeCotroller : MonoBehaviour
             movement.Set(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         currentBreak = breakPress || !playerOnBike ? breakForce : 0f;
-
+        if(movement != Vector2.zero)
+        {    
+            _audio.enabled = true;
+        }
+        else
+            _audio.enabled = false;
         if (movement.sqrMagnitude > 1f)
                 movement.Normalize();
 

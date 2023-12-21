@@ -27,6 +27,7 @@ public class StartnFinishPoint : MonoBehaviour
     {
         if(begin)
             time.currentTime += Time.deltaTime;
+            DisplayTime(time.currentTime);
     }
 
     public void DisplayTime(float timeToDisplay)
@@ -43,12 +44,11 @@ public class StartnFinishPoint : MonoBehaviour
             _point = point.start;
             begin = true;
         }
-        else 
+        else if(other.GetComponent<PlayerMovement>() && _Gscore.allMailSend)
         {
             _point = point.finish;
             if(!hasSendTime && _point == point.finish)
             {
-                DisplayTime(time.currentTime);
                 hasSendTime = true;
                 _Gscore.activeScore();
             }

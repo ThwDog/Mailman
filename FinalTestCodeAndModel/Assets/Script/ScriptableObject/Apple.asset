@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 484f5328a80be4d46896d79374796520, type: 3}
   m_Name: Apple
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b2b2f5ca680374349ba9a9e13442bf60, type: 3}
   itemName: Apple
   itemDesciption: apple
-  Prefap: {fileID: 0}
-  model: {fileID: 9042369439069926689, guid: e93db28da2a50ed42b0d8cc3d9a619e5, type: 3}
+  Prefap: {fileID: 3070931269602483009, guid: 4634394a3a2c8bc4e8bf2137f7895442, type: 3}
+  model: {fileID: 4957921381009381905, guid: c6ea01778452177498832b8604c7d84a, type: 3}
   type: 0
   radiusSize: 3
   _item_Weight: 2

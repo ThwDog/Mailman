@@ -18,7 +18,7 @@ MonoBehaviour:
   Prefap: {fileID: 1691219455279203625, guid: fd550c510a17248428b245d8b4f4746f, type: 3}
   model: {fileID: 1200096290999806692, guid: 2e41f3d688867c64483c0521cc644c32, type: 3}
   type: 0
-  radiusSize: 0.5
+  radiusSize: 1
   _item_Weight: 1
   item:
     amountItemInPack: 0

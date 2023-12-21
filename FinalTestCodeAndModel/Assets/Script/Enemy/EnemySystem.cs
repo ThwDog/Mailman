@@ -15,6 +15,7 @@ public class EnemySystem : MonoBehaviour
     
     private _SceneManager scene;
     [SerializeField]private Animator anim;
+    private AudioSource _audio;
 
     public float _currentSpeed
     {
@@ -24,13 +25,13 @@ public class EnemySystem : MonoBehaviour
         }
     }
 
-    public bool _startChasing
+    /*public bool _startChasing
     {
         get
         {
             return startChasing = Vector3.Distance(transform.position,player.transform.position) <= 2f ? false : true;
         }
-    }
+    }*/
 
     private void Awake() 
     {
@@ -39,6 +40,7 @@ public class EnemySystem : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         currentSpeed = speed;
         anim = GetComponent<Animator>();
+        _audio = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate() 
@@ -52,19 +54,23 @@ public class EnemySystem : MonoBehaviour
         {
             Vector3 playerpos = new Vector3(player.transform.position.x,gameObject.transform.position.y,player.transform.position.z);
             transform.LookAt(playerpos);
-            if(_startChasing)
+            if(startChasing)
             {
                 transform.position = Vector3.MoveTowards(transform.position, playerpos, _currentSpeed *Time.deltaTime);
+                anim.SetBool("Chasing",true);
+                _audio.enabled = true;
             }
-            anim.SetBool("Chasing",true);
         }
-        else    
+        else if(!startChasing && !startLookAt)  
+        {    
             anim.SetBool("Chasing",false);
+            _audio.enabled = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other) 
     {
-        if(_startChasing && other.gameObject.GetComponent<PlayerMovement>())
+        if(startChasing && other.gameObject.GetComponent<PlayerMovement>())
         {
             scene.restartScene();
         }
@@ -74,5 +80,11 @@ public class EnemySystem : MonoBehaviour
     {
         startChasing = true;
         startLookAt = true;
+    }
+
+    public void stopchasing()
+    {
+        startChasing = false;
+        startLookAt = false;
     }
 }

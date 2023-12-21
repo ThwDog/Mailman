@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerInput))]
@@ -35,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     private PlayerInput p_input;
     private bool isGrounded = true;
-    private bool isRunning;
+    private bool isRunning = false;
     private float verticalSpeed;
     private float _currentSpeed;
     [SerializeField]private float forceMagnitude;
@@ -57,6 +58,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Scene")]
     private _SceneManager scene;
 
+    [Header("Audio")]
+    private AudioSource walkaudio;
+
     private float currentSpeed
     {
         get
@@ -70,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
         scene = GameObject.Find("SceneManger").gameObject.GetComponent<_SceneManager>();
         Cursor.visible = false;
         cameraTranform = Camera.main.transform;
+        walkaudio = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -95,12 +100,18 @@ public class PlayerMovement : MonoBehaviour
 
     void move()
     {
+        if(p_input.movement.x != 0 || p_input.movement.y != 0)
+        {    
+            walkaudio.enabled = true;
+        }
+        else
+            walkaudio.enabled = false;
         Vector3 move = new Vector3(p_input.movement.x,0,p_input.movement.y);
         if(move.sqrMagnitude > 1.0f){
             move.Normalize();
         }
-        isRunning = p_input.run;
-
+        //isRunning = p_input.run;
+        
         //rotation
         move = cameraTranform.forward * move.z + cameraTranform.right * move.x;
         move.y = 0f; 
@@ -108,8 +119,6 @@ public class PlayerMovement : MonoBehaviour
         move += verticalSpeed * Vector3.up * Time.deltaTime;
         //Move
         player.Move(move * currentSpeed);
-
-        // Changes the height position of the player..
         
     }
 
