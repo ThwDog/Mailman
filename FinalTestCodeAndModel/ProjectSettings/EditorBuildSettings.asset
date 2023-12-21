@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TestScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/GAme_mailman_nowindow.unity
+    guid: 87c999f50cf8ba242b854d10d90e1aa3
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: b96427939146cf843b6a1d7a4178be80, type: 2}

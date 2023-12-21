@@ -22,6 +22,8 @@ public class Goal : MonoBehaviour
             {
                 mailHasSend = true;
                 _GScore.sendMail();
+                Destroy(other.gameObject);
+                gameObject.active = false;
             }
         }        
     }
